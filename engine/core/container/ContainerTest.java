@@ -3,7 +3,7 @@ package engine.core.container;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContainerTest {
     private Container container;
