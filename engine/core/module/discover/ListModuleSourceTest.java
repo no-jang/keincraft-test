@@ -18,11 +18,11 @@ public class ListModuleSourceTest {
     }
 
     @Test
-    public void givenModuleClasses_whenDiscoverModuleClasses_thenReturnClasses() {
+    public void givenModuleClasses_whenDiscoverModuleClassCandidates_thenReturnClasses() {
         List<Class<?>> classes = List.of(TestModule.class, TestModule2.class);
         source.addClasses(classes);
 
-        List<Class<?>> discoveredClasses = source.discoverModuleClasses();
+        List<Class<?>> discoveredClasses = source.discoverModuleClassCandidates();
 
         assertThat(discoveredClasses).isEqualTo(classes);
     }
