@@ -4,6 +4,8 @@ import engine.collection.iteration.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,20 +26,33 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void givenNonEmptyArrayStack_whenGetHead_thenReturnHeadOfStack() {
+    public void givenNonEmptyArrayStack_whenGetElements_thenReturnHeadOfStack() {
         assertThat(stack.size()).isEqualTo(2);
         assertThat(stack.get(0)).isEqualTo(object1);
+        assertThat(stack.get(1)).isEqualTo(object2);
+        assertThat(stack.getTail()).isEqualTo(object1);
         assertThat(stack.getHead()).isEqualTo(object2);
     }
 
     @Test
-    public void givenNegativePos_whenPeekOrNull_thenThrowIllegalArgumentException() {
+    public void givenEmptyArrayStack_whenGetElements_thenThrowNoSuchElementException() {
+        ArrayStack<Object> stack = new ArrayStack<>();
+
+        assertThatThrownBy(stack::getHead)
+                .isInstanceOf(NoSuchElementException.class);
+
+        assertThatThrownBy(stack::getTail)
+                .isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    public void givenNegativeIndex_whenGetOrNull_thenThrowIllegalArgumentException() {
         assertThatThrownBy(() -> stack.getOrNull(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    public void givenPosHigherThanSize_whenPeekOrNull_thenThrowIllegalArgumentException() {
+    public void givenIndexHigherThanSize_whenGetOrNull_thenThrowIllegalArgumentException() {
         assertThat(stack.getOrNull(1)).isEqualTo(object2);
 
         assertThatThrownBy(() -> stack.getOrNull(2))
@@ -61,5 +76,13 @@ public class ArrayStackTest {
 
         assertThat(iterator.next()).isEqualTo(object1);
         assertThat(iterator.next()).isEqualTo(object2);
+    }
+
+    @Test
+    public void whenReverseIterator_thenIterateCorrectly() {
+        Iterator<Object> iterator = stack.reverseIterator();
+
+        assertThat(iterator.next()).isEqualTo(object2);
+        assertThat(iterator.next()).isEqualTo(object1);
     }
 }

@@ -1,5 +1,6 @@
 package engine.collection.iteration;
 
+import engine.collection.iteration.reverse.ReverseArrayIterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ArrayIteratorTest {
+public class ReverseArrayIteratorTest {
     private Object object1;
     private Object object2;
     private Iterator<Object> iterator;
@@ -18,30 +19,30 @@ public class ArrayIteratorTest {
         object1 = new Object();
         object2 = new Object();
 
-        iterator = new ArrayIterator<>(new Object[]{object1, object2}, 2);
+        iterator = new ReverseArrayIterator<>(new Object[]{object1, object2}, 2);
     }
 
     @Test
     public void givenIteratorHasNext_whenNext_thenReturnNext() {
-        assertThat(iterator.next()).isEqualTo(object1);
         assertThat(iterator.next()).isEqualTo(object2);
+        assertThat(iterator.next()).isEqualTo(object1);
     }
 
     @Test
     public void givenIteratorHasNotNext_whenNext_thenThrowNoSuchElementException() {
-        ArrayIterator<Object> iterator = new ArrayIterator<>(new Object[0], 0);
+        ReverseArrayIterator<Object> iterator = new ReverseArrayIterator<>(new Object[0], 0);
 
         assertThatThrownBy(iterator::next)
                 .isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
-    public void givenIteratorHasNext_whenReset_thenBeginAtIndexZero() {
-        assertThat(iterator.next()).isEqualTo(object1);
+    public void givenIteratorHasNext_whenReset_thenBeginAtArraySize() {
+        assertThat(iterator.next()).isEqualTo(object2);
 
         iterator.reset();
 
-        assertThat(iterator.next()).isEqualTo(object1);
         assertThat(iterator.next()).isEqualTo(object2);
+        assertThat(iterator.next()).isEqualTo(object1);
     }
 }
