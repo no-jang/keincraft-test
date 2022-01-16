@@ -19,7 +19,7 @@ public class ArrayStackTest {
         object1 = new Object();
         object2 = new Object();
 
-        stack = ArrayStack.newBuilder(2)
+        stack = new ArrayStack.Builder<>(2)
                 .add(object1)
                 .add(object2)
                 .build();
