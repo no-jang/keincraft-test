@@ -85,4 +85,9 @@ public class ArrayStackTest {
         assertThat(iterator.next()).isEqualTo(object2);
         assertThat(iterator.next()).isEqualTo(object1);
     }
+
+    @Test
+    public void whenToMutable_thenCreateNewMutableArrayStack() {
+        assertThat(stack.toMutable()).isNotEqualTo(stack);
+    }
 }

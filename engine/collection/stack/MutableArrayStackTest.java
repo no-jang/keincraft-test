@@ -37,4 +37,12 @@ public class MutableArrayStackTest {
         assertThatThrownBy(() -> stack.pop())
                 .isInstanceOf(NoSuchElementException.class);
     }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void whenToMutable_thenReturnThis() {
+        ArrayStack<Object> stack2 = (ArrayStack<Object>) stack;
+
+        assertThat(stack2.toMutable()).isEqualTo(stack);
+    }
 }
