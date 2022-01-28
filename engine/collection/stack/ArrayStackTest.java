@@ -43,18 +43,18 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void getHeadOrNull_Should_ReturnNull_When_StackIsEmpty() {
+    public void headOrNull_Should_ReturnNull_When_StackIsEmpty() {
         ArrayStackMock stack = new ArrayStackMock(0);
-        assertThat(stack.getHeadOrNull()).isEqualTo(null);
+        assertThat(stack.headOrNull()).isEqualTo(null);
     }
 
     @Test
-    public void getHeadOrNull_Should_ReturnHead() {
+    public void headOrNull_Should_ReturnHead() {
         Object object = new Object();
         Object object2 = new Object();
         ArrayStackMock stack = new ArrayStackMock(new Object[]{object, object2}, 2);
 
-        assertThat(stack.getHeadOrNull()).isEqualTo(object2);
+        assertThat(stack.headOrNull()).isEqualTo(object2);
     }
 
     @Test
