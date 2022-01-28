@@ -1,13 +1,7 @@
 package engine.collection.list;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 public class ArrayListTest {
-    private MutableList<Object> list;
+   /* private MutableList<Object> list;
 
     @BeforeEach
     public void beforeEach() {
@@ -166,5 +160,5 @@ public class ArrayListTest {
 
             i++;
         }
-    }
+    }*/
 }
