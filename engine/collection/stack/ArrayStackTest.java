@@ -68,7 +68,7 @@ public class ArrayStackTest {
         assertThat(stack.getArray()).isEmpty();
     }
 
-    private static class ArrayStackMock extends ArrayStack<Object> {
+    public static class ArrayStackMock extends ArrayStack<Object> {
         public ArrayStackMock() {
             this(0);
         }
