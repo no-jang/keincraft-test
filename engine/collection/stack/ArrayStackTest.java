@@ -1,5 +1,6 @@
 package engine.collection.stack;
 
+import engine.collection.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -65,7 +66,7 @@ public class ArrayStackTest {
 
         stack.clear();
 
-        assertThat(stack.getArray()).isEmpty();
+        assertThat(stack.getArray()).containsOnlyNulls();
     }
 
     public static class ArrayStackMock extends ArrayStack<Object> {
@@ -74,7 +75,8 @@ public class ArrayStackTest {
         }
 
         public ArrayStackMock(int defaultCapacity) {
-            super(defaultCapacity);
+            this.size = 0;
+            this.array = Arrays.unsafeCastNewArray(defaultCapacity);
         }
 
         public ArrayStackMock(Object[] array, int size) {

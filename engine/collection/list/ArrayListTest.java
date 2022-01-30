@@ -1,5 +1,6 @@
 package engine.collection.list;
 
+import engine.collection.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -121,7 +122,7 @@ public class ArrayListTest {
         assertThat(list.set(0, object2)).isEqualTo(object);
         assertThat(list.set(1, object3)).isEqualTo(null);
 
-        assertThat(list.getArray()).containsExactly(object2, object3);
+        assertThat(list.getArray()).containsSequence(object2, object3);
     }
 
     @Test
@@ -140,15 +141,33 @@ public class ArrayListTest {
 
     @Test
     public void removeOrNull_Should_RemoveElement() {
-        Object object = new Object();
+        Object object1 = new Object();
         Object object2 = new Object();
         Object object3 = new Object();
-        ArrayListMock list = new ArrayListMock(new Object[]{object, object2, object3}, 3);
+        Object object4 = new Object();
+        Object object5 = new Object();
+        Object object6 = new Object();
+        Object object7 = new Object();
+        Object object8 = new Object();
+        Object object9 = new Object();
+        Object object10 = new Object();
 
-        assertThat(list.removeOrNull(0)).isEqualTo(object);
-        assertThat(list.getArray()).containsSequence(object2, object3);
-        assertThat(list.removeOrNull(1)).isEqualTo(object3);
-        assertThat(list.getArray()).containsSequence(object2);
+        Object[] objects = new Object[]{object1, object2, object3, object4, object5, object6, object7, object8, object9, object10};
+
+        ArrayListMock list = new ArrayListMock(objects, 10);
+
+        assertThat(list.removeOrNull(0)).isEqualTo(object1);
+        assertThat(list.removeOrNull(0)).isEqualTo(object2);
+        assertThat(list.removeOrNull(0)).isEqualTo(object3);
+        assertThat(list.removeOrNull(0)).isEqualTo(object4);
+        assertThat(list.removeOrNull(0)).isEqualTo(object5);
+        assertThat(list.removeOrNull(0)).isEqualTo(object6);
+        assertThat(list.removeOrNull(0)).isEqualTo(object7);
+        assertThat(list.removeOrNull(0)).isEqualTo(object8);
+        assertThat(list.removeOrNull(0)).isEqualTo(object9);
+        assertThat(list.removeOrNull(0)).isEqualTo(object10);
+
+        assertThat(list.getArray()).hasSizeLessThan(10);
     }
 
     public static class ArrayListMock extends ArrayList<Object> {
@@ -157,7 +176,8 @@ public class ArrayListTest {
         }
 
         public ArrayListMock(int defaultCapacity) {
-            super(defaultCapacity);
+            this.size = 0;
+            this.array = Arrays.unsafeCastNewArray(defaultCapacity);
         }
 
         public ArrayListMock(Object[] array, int size) {
