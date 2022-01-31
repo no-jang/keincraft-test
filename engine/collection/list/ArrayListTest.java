@@ -20,7 +20,7 @@ public class ArrayListTest {
         ArrayListMock list = new ArrayListMock(new Object[]{
                 new Object(),
                 new Object()
-        }, 2);
+        });
 
         assertThat(list.indexOf(new Object())).isEqualTo(-1);
     }
@@ -30,10 +30,41 @@ public class ArrayListTest {
         Object object = new Object();
         ArrayListMock list = new ArrayListMock(new Object[]{
                 new Object(),
+                object,
                 object
-        }, 2);
+        });
 
         assertThat(list.indexOf(object)).isEqualTo(1);
+    }
+
+    @Test
+    public void lastIndexOf_Should_ReturnMinusOne_When_ElementIsNull() {
+        ArrayListMock list = new ArrayListMock();
+
+        assertThat(list.lastIndexOf(null)).isEqualTo(-1);
+    }
+
+    @Test
+    public void lastIndexOf_Should_ReturnMinusOne_When_ElementNotFound() {
+        ArrayListMock list = new ArrayListMock(new Object[]{
+                new Object(),
+                new Object()
+        });
+
+        assertThat(list.lastIndexOf(new Object())).isEqualTo(-1);
+    }
+
+    @Test
+    public void lastIndexOf_Should_ReturnElement() {
+        Object object = new Object();
+        ArrayListMock list = new ArrayListMock(new Object[]{
+                new Object(),
+                object,
+                object,
+                new Object()
+        });
+
+        assertThat(list.lastIndexOf(object)).isEqualTo(2);
     }
 
     @Test
@@ -53,7 +84,7 @@ public class ArrayListTest {
 
     @Test
     public void getOrNull_Should_ReturnNull_When_IndexIsOutOfRange() {
-        ArrayListMock list = new ArrayListMock(new Object[]{new Object()}, 1);
+        ArrayListMock list = new ArrayListMock(new Object[]{new Object()});
 
         assertThat(list.getOrNull(1)).isEqualTo(null);
     }
@@ -65,7 +96,7 @@ public class ArrayListTest {
         ArrayListMock list = new ArrayListMock(new Object[]{
                 object,
                 object2
-        }, 2);
+        });
 
         assertThat(list.getOrNull(0)).isEqualTo(object);
         assertThat(list.getOrNull(1)).isEqualTo(object2);
@@ -81,7 +112,7 @@ public class ArrayListTest {
     @Test
     public void tailOrNull_Should_ReturnHead() {
         Object object = new Object();
-        ArrayListMock list = new ArrayListMock(new Object[]{object}, 1);
+        ArrayListMock list = new ArrayListMock(new Object[]{object});
 
         assertThat(list.tailOrNull()).isEqualTo(object);
     }
@@ -104,7 +135,7 @@ public class ArrayListTest {
 
     @Test
     public void set_Should_ThrowIllegalArgumentException_When_IndexIsMoreThanSize() {
-        ArrayListMock list = new ArrayListMock(new Object[]{new Object()}, 1);
+        ArrayListMock list = new ArrayListMock(new Object[]{new Object()});
 
         list.set(1, new Object());
         assertThatThrownBy(() -> list.set(3, new Object()))
@@ -127,7 +158,7 @@ public class ArrayListTest {
 
     @Test
     public void removeOrNull_Should_ReturnNull_When_ElementDoesNotExist() {
-        ArrayListMock list = new ArrayListMock(new Object[]{new Object()}, 1);
+        ArrayListMock list = new ArrayListMock(new Object[]{new Object()});
 
         assertThat(list.removeOrNull(1)).isEqualTo(null);
     }
@@ -154,7 +185,7 @@ public class ArrayListTest {
 
         Object[] objects = new Object[]{object1, object2, object3, object4, object5, object6, object7, object8, object9, object10};
 
-        ArrayListMock list = new ArrayListMock(objects, 10);
+        ArrayListMock list = new ArrayListMock(objects);
 
         assertThat(list.removeOrNull(0)).isEqualTo(object1);
         assertThat(list.removeOrNull(0)).isEqualTo(object2);
@@ -178,6 +209,10 @@ public class ArrayListTest {
         public ArrayListMock(int defaultCapacity) {
             this.size = 0;
             this.array = Arrays.unsafeCastNewArray(defaultCapacity);
+        }
+
+        public ArrayListMock(Object[] array) {
+            this(array, array.length);
         }
 
         public ArrayListMock(Object[] array, int size) {
