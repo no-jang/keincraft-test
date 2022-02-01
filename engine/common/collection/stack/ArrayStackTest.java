@@ -1,6 +1,6 @@
-package engine.collection.stack;
+package engine.common.collection.stack;
 
-import engine.collection.util.Arrays;
+import engine.common.collection.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

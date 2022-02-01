@@ -1,6 +1,6 @@
-package engine.collection.list;
+package engine.common.collection.list;
 
-import engine.collection.util.Arrays;
+import engine.common.collection.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

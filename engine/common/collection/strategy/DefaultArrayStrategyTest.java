@@ -1,5 +1,6 @@
-package engine.collection.strategy;
+package engine.common.collection.strategy;
 
+import engine.api.collection.strategy.ArrayStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
