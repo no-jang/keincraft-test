@@ -198,7 +198,7 @@ public class ArrayListTest {
         assertThat(list.removeOrNull(0)).isEqualTo(object9);
         assertThat(list.removeOrNull(0)).isEqualTo(object10);
 
-        assertThat(list.getArray()).hasSizeLessThan(10);
+        assertThat(list.getArray()).hasSize(0);
     }
 
     public static class ArrayListMock extends ArrayList<Object> {
